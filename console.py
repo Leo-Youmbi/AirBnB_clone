@@ -3,7 +3,7 @@
 import cmd
 
 
-class AirbnbShell(cmd.Cmd):
+class HBNBCommand(cmd.Cmd):
     """Implementation of a AirBNB CLI"""
     prompt = "(hbnb) "
 
@@ -12,9 +12,12 @@ class AirbnbShell(cmd.Cmd):
         return True
 
     def do_quit(self, line):
-        """exit console"""
+        """Quit command to exit the program"""
         return True
+
+    def emptyline(self) -> bool:
+        pass
 
 
 if __name__ == '__main__':
-    AirbnbShell().cmdloop()
+    HBNBCommand().cmdloop()
