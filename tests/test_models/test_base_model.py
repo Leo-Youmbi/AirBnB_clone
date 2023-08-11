@@ -22,6 +22,7 @@ class MyTestCase(unittest.TestCase):
     """
     Test for Base Model
     """
+
     def test_initialization(self):
         """
         test for init
@@ -49,7 +50,6 @@ class MyTestCase(unittest.TestCase):
         base = BaseModel()
         base.save()
         self.assertIsInstance(base.updated_at, datetime)
-
 
 
 if __name__ == '__main__':
