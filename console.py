@@ -71,12 +71,38 @@ class HBNBCommand(cmd.Cmd):
         if args[0] not in classnames:
             print("** class doesn't exist **")
         else:
-            for k, v in all_objs.items():
-                print(v)
+            print([str(v) for k, v in all_objs.items()])
 
     def do_update(self, line):
         """Updates the value of the entered model instance's attribute"""
-        pass
+        args = self.parse(line)
+        id_exists = False
+        should_continue = False
+        all_objs = models.storage.all()
+        if args[0] == '':
+            print("** class name missing **")
+        elif args[0] not in [cl.__name__ for cl in MODELS]:
+            print("** class doesn't exist **")
+        elif len(args) == 1:
+            print("** instance id missing ** ")
+        else:
+            for k, v in all_objs.items():
+                if args[1] == k.split(".")[1]:
+                    obj = v
+                    id_exists = True
+                    should_continue = True
+                    break
+            if not id_exists:
+                print("** no instance found **")
+        if not should_continue:
+            return
+        if len(args) == 2:
+            print("** attribute name missing **")
+        elif len(args) == 3:
+            print("** value missing **")
+        else:
+            setattr(obj, args[2], eval(args[3]))
+            obj.save()
 
     def do_EOF(self, line):
         """exit console on EOF signal (^D)"""
