@@ -26,7 +26,7 @@ class HBNBCommand(cmd.Cmd):
                     obj = cl()
                     obj.save()
                     print(obj.id)
-                    break
+                    return
 
     def do_show(self, line):
         """Show the string repr of an object having the given id"""
@@ -62,6 +62,21 @@ class HBNBCommand(cmd.Cmd):
                     models.storage.save()
                     return
             print("** no instance found **")
+
+    def do_all(self, line):
+        """Prints all the instances of a Model"""
+        classnames = [cl.__name__ for cl in MODELS]
+        args = self.parse(line)
+        all_objs = models.storage.all().copy()
+        if args[0] not in classnames:
+            print("** class doesn't exist **")
+        else:
+            for k, v in all_objs.items():
+                print(v)
+
+    def do_update(self, line):
+        """Updates the value of the entered model instance's attribute"""
+        pass
 
     def do_EOF(self, line):
         """exit console on EOF signal (^D)"""
