@@ -4,6 +4,9 @@ import json
 import os
 
 from models.base_model import BaseModel
+from models.user import User
+
+MODELS = [BaseModel, User]
 
 
 class FileStorage:
@@ -44,5 +47,8 @@ class FileStorage:
             with open(path, "r") as f:
                 objs = json.load(f)
             for key, value in objs.items():
-                obj = BaseModel(**value)
-                self.new(obj)
+                for cls in MODELS:
+                    if key.split(".")[0] == cls.__name__:
+                        obj = cls(**value)
+                        self.new(obj)
+                        break
