@@ -2,10 +2,15 @@
 """AirBNB clone console"""
 import cmd
 import models
-
+from models.amenity import Amenity
 from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 
-MODELS = [BaseModel]
+MODELS = [BaseModel, User, Amenity, Place, City, Review, State]
 
 
 class HBNBCommand(cmd.Cmd):
@@ -65,16 +70,16 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, line):
         """Prints all the instances of a Model"""
-        classnames = [cl.__name__ for cl in MODELS]
         args = self.parse(line)
         all_objs = models.storage.all().copy()
-        if args[0] not in classnames:
+        if args[0] not in [cl.__name__ for cl in MODELS]:
             print("** class doesn't exist **")
         else:
-            print([str(v) for k, v in all_objs.items()])
+            print([str(value) for key, value in all_objs.items() if key.split(".")[0] == args[0]])
 
     def do_update(self, line):
-        """Updates the value of the entered model instance's attribute"""
+        """Updates the value of the entered model instance's attribute
+        Usage: update <class name> <id> <attribute name> "<attribute value>"""
         args = self.parse(line)
         id_exists = False
         should_continue = False
