@@ -75,9 +75,11 @@ class HBNBCommand(cmd.Cmd):
         if args[0] not in [cl.__name__ for cl in MODELS]:
             print("** class doesn't exist **")
         else:
-            print([str(value)
-                   for key, value in all_objs.items()
-                   if key.split(".")[0] == args[0]])
+            print(
+                [str(value)
+                 for key, value in all_objs.items()
+                 if key.split(".")[0] == args[0]]
+            )
 
     def do_update(self, line):
         """Updates the value of the entered model instance's attribute
