@@ -113,11 +113,12 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self) -> bool:
+        """Ensures the non-execution of anything when nothing is entered"""
         pass
 
     def parse(self, line):
-        args = line.split(" ")
-        return args
+        """Parses a line into a list of arguments"""
+        return line.split(" ")
 
 
 if __name__ == '__main__':
