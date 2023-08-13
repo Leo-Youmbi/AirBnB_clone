@@ -118,36 +118,36 @@ class HBNBCommand(cmd.Cmd):
     def default(self, line: str):
         """Executes commands when the command prefix is not recognized"""
         if re.search(r"[A-Za-z]+\.[A-Za-z]+\([^)]*\)$", line) is None:
-            printUnknown(line)
-            return
+            return printUnknown(line)
         line_parts = line.split('.')
-        classname = line_parts[0]
+        className = line_parts[0]
 
         text_after_dot = re.search(r"\.(.*?)\(", line).group(1)
 
         text_inside_brackets = re.search(
                 r"\(([^']*)\)",
                 line_parts[1]).group(1)
-        if classname in [cl.__name__ for cl in MODELS]:
+
+        if className in [cl.__name__ for cl in MODELS]:
             if text_after_dot == "all" and text_inside_brackets == '':
-                self.do_all(classname)
+                self.do_all(className)
             elif text_after_dot == "destroy" and text_inside_brackets != '':
                 text_inside_quotes = re.search(r'"[^"]*"', text_inside_brackets)
                 if text_inside_quotes:
                     text_inside_quotes = text_inside_quotes.group(0)[1:-1]
-                    self.do_destroy(classname + ' ' + text_inside_quotes)
+                    self.do_destroy(className + ' ' + text_inside_quotes)
                 else:
                     return printUnknown(line)
             elif text_after_dot == "show" and text_inside_brackets != '':
                 text_inside_quotes = re.search(r'"[^"]*"', text_inside_brackets)
                 if text_inside_quotes:
                     text_inside_quotes = text_inside_quotes.group(0)[1:-1]
-                    self.do_show(classname + ' ' + text_inside_quotes)
+                    self.do_show(className + ' ' + text_inside_quotes)
                 else:
                     return printUnknown(line)
             elif text_after_dot == "update" and text_inside_brackets != '':
                 text_inside = text_inside_brackets.replace(",", "")
-                sentence = f"{classname}"
+                sentence = f"{className}"
                 i = 0
                 for arg in text_inside.split(" "):
                     i += 1
@@ -155,24 +155,12 @@ class HBNBCommand(cmd.Cmd):
                         sentence += f" {arg[1:-1]}"
                     else:
                         sentence += f" {arg}"
-                print(sentence)
                 if i == 3 and sentence[-1] == " ":
                     return printUnknown(line)
-                self.do_update(sentence)
-
-            return
+                else:
+                    self.do_update(sentence)
+                    return
         printUnknown(line)
-        # if classname in [cl.__name__ for cl in MODELS]:
-        #     if len(line_parts) > 1:
-        #         if line_parts[1] == "all()":
-        #             self.do_all(classname)
-        #         elif "destroy" in line_parts[1]:
-        #             match = re.search(r"\('([^']*)'\)", line_parts[1])
-        #             if match:
-        #                 extracted_text = match.group(1)
-        #                 print(extracted_text)
-        #         return
-        # print("*** Unknown syntax: {}".format(line))
 
     def do_EOF(self, line):
         """exit console on EOF signal (^D)"""
