@@ -132,14 +132,20 @@ class HBNBCommand(cmd.Cmd):
             if text_after_dot == "all" and text_inside_brackets == '':
                 self.do_all(className)
             elif text_after_dot == "destroy" and text_inside_brackets != '':
-                text_inside_quotes = re.search(r'"[^"]*"', text_inside_brackets)
+                text_inside_quotes = re.search(
+                    r'"[^"]*"',
+                    text_inside_brackets
+                )
                 if text_inside_quotes:
                     text_inside_quotes = text_inside_quotes.group(0)[1:-1]
                     self.do_destroy(className + ' ' + text_inside_quotes)
                 else:
                     printUnknown(line)
             elif text_after_dot == "show" and text_inside_brackets != '':
-                text_inside_quotes = re.search(r'"[^"]*"', text_inside_brackets)
+                text_inside_quotes = re.search(
+                    r'"[^"]*"',
+                    text_inside_brackets
+                )
                 if text_inside_quotes:
                     text_inside_quotes = text_inside_quotes.group(0)[1:-1]
                     self.do_show(className + ' ' + text_inside_quotes)
@@ -190,6 +196,7 @@ class HBNBCommand(cmd.Cmd):
 
 
 def printUnknown(line):
+    """Prints when there is an unknown syntax"""
     print("*** Unknown syntax: {}".format(line))
 
 
