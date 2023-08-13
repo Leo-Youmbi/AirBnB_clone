@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 """
-User Module
+The user Module that contains the User Model
 """
 from models.base_model import BaseModel
 
 
 class User(BaseModel):
     """A class representation of a User Model"""
-    email: str = ""
-    password: str = ""
-    first_name: str = ""
-    last_name: str = ""
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""
