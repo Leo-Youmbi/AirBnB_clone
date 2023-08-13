@@ -1,0 +1,20 @@
+{
+    "City.58dec920-e6d2-4f72-afd9-dafdb1c7632b": {
+        "id": "58dec920-e6d2-4f72-afd9-dafdb1c7632b",
+        "created_at": "2023-08-13T14:04:51.688519",
+        "updated_at": "2023-08-13T14:04:51.688628",
+        "__class__": "City"
+    },
+    "User.47a0fae1-9deb-4a85-b656-4840ca09da84": {
+        "id": "47a0fae1-9deb-4a85-b656-4840ca09da84",
+        "created_at": "2023-08-13T14:08:08.915898",
+        "updated_at": "2023-08-13T14:08:08.916020",
+        "__class__": "User"
+    },
+    "BaseModel.8b40b73c-4c0f-42fb-a3f3-4a99d673f84d": {
+        "id": "8b40b73c-4c0f-42fb-a3f3-4a99d673f84d",
+        "created_at": "2023-08-13T14:14:36.315366",
+        "updated_at": "2023-08-13T14:14:36.315407",
+        "__class__": "BaseModel"
+    }
+}
