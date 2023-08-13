@@ -125,8 +125,8 @@ class HBNBCommand(cmd.Cmd):
         text_after_dot = re.search(r"\.(.*?)\(", line).group(1)
 
         text_inside_brackets = re.search(
-                r"\(([^']*)\)",
-                line_parts[1]).group(1)
+            r"\(([^']*)\)",
+            line_parts[1]).group(1)
 
         if className in [cl.__name__ for cl in MODELS]:
             if text_after_dot == "all" and text_inside_brackets == '':
@@ -184,4 +184,7 @@ def printUnknown(line):
 
 
 if __name__ == '__main__':
-    HBNBCommand().cmdloop()
+    try:
+        HBNBCommand().cmdloop()
+    except KeyboardInterrupt:
+        print("^C")
