@@ -18,7 +18,7 @@ cd AirBnB_clone
 
 3. Run the command interpreter by executing the console.py file:
 ```
-python console.py
+./console.py
 ```
 
 After executing these steps, you should see the command prompt of the AirBnB clone's command interpreter, indicating that it is ready for user input.
