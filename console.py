@@ -137,14 +137,14 @@ class HBNBCommand(cmd.Cmd):
                     text_inside_quotes = text_inside_quotes.group(0)[1:-1]
                     self.do_destroy(className + ' ' + text_inside_quotes)
                 else:
-                    return printUnknown(line)
+                    printUnknown(line)
             elif text_after_dot == "show" and text_inside_brackets != '':
                 text_inside_quotes = re.search(r'"[^"]*"', text_inside_brackets)
                 if text_inside_quotes:
                     text_inside_quotes = text_inside_quotes.group(0)[1:-1]
                     self.do_show(className + ' ' + text_inside_quotes)
                 else:
-                    return printUnknown(line)
+                    printUnknown(line)
             elif text_after_dot == "update" and text_inside_brackets != '':
                 text_inside = text_inside_brackets.replace(",", "")
                 sentence = f"{className}"
@@ -156,11 +156,21 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         sentence += f" {arg}"
                 if i == 3 and sentence[-1] == " ":
-                    return printUnknown(line)
+                    printUnknown(line)
                 else:
                     self.do_update(sentence)
-                    return
-        printUnknown(line)
+            elif text_after_dot == "count" and text_inside_brackets == '':
+                all_objs = models.storage.all().copy()
+                if className not in [cl.__name__ for cl in MODELS]:
+                    print("** class doesn't exist **")
+                else:
+                    count = 0
+                    for k, v in all_objs.items():
+                        if v.__class__.__name__ == className:
+                            count += 1
+                    print(count)
+        else:
+            printUnknown(line)
 
     def do_EOF(self, line):
         """exit console on EOF signal (^D)"""
