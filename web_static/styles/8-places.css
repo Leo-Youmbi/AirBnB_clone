@@ -9,7 +9,7 @@ section.places h1 {
 	border: 1px solid #FF5A5F;
 	border-radius: 4px;
 	display: inline-block;
-	position: relative;
+	/* position: relative; */
 }
 
 .places article h2 {
